@@ -1,0 +1,14 @@
+services:
+  simulator:
+    build: .
+    ports:
+      - '3000:3000'
+    volumes:
+      - flight-data:/app/data
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DB_PATH=/app/data/flights.db
+
+volumes:
+  flight-data:
