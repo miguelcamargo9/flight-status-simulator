@@ -1,3 +1,4 @@
+import path from 'path';
 import swaggerJsdoc from 'swagger-jsdoc';
 
 const options: swaggerJsdoc.Options = {
@@ -67,7 +68,7 @@ const options: swaggerJsdoc.Options = {
       },
     },
   },
-  apis: ['./src/api/flight-routes.ts'],
+  apis: [path.resolve(__dirname, 'flight-routes.*')],
 };
 
 export const swaggerSpec = swaggerJsdoc(options);
