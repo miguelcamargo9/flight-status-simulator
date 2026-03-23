@@ -19,7 +19,10 @@ export function createApp(
     res.json({ status: 'ok' });
   });
 
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  app.get('/swagger.json', (_req, res) => { res.json(swaggerSpec); });
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(undefined, {
+    swaggerOptions: { url: '/swagger.json' },
+  }));
 
   app.use('/flights', createFlightRouter(repository, engine));
   app.get('/flights/:id/stream', createSseHandler(repository, engine));
