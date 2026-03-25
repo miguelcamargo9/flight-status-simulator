@@ -60,9 +60,9 @@ export class SimulationEngine {
 
   private tick(flightId: string, timeScale: number, startedAt: Date): void {
     const elapsedMs = Date.now() - startedAt.getTime();
-    const elapsedSimMinutes = (elapsedMs / 1000) * timeScale;
+    const elapsedSimMinutes = (elapsedMs / 60000);
 
-    const metrics = calculateMetrics(elapsedSimMinutes);
+    const metrics = calculateMetrics(elapsedSimMinutes * timeScale);
 
     this.repository.addMetricsSnapshot(flightId, metrics);
     this.events.emit(`metrics:${flightId}`, metrics);
